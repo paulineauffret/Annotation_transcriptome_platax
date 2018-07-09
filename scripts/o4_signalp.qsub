@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS parameters
+
+ASSEMBLY=               #path to transcriptome assembly (fasta file)
+TRANSDEC=               #path to .transdecoder.pep file (resulting from step 01)
+SIGP=			#path to signalp-4.1/signalp
+TAG="04_signalp"
+OUTPUT_DIRECTORY=       #path to output directory
+WORKING_DIRECTORY=${OUTPUT_DIRECTORY}/${TAG}
+OUT=${WORKING_DIRECTORY}/signalp.out
+LOG=${WORKING_DIRECTORY}/signalp.log
+
+mkdir -p ${WORKING_DIRECTORY}
+
+cd ${WORKING_DIRECTORY}
+
+$SIGP -f short -n $OUT $TRANSDEC

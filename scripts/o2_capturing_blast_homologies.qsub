@@ -1,0 +1,22 @@
+#!/bin/bash
+#PBS parameters...
+
+ASSEMBLY=		#path to transcriptome assembly (fasta file)
+TRANSDEC=		#path to .transdecoder.pep file (resulting from step 01)
+DB=			#path to uniprot_sprot.pep file (resulting from step 01)
+TAG="02_capturing_blast_homologies"
+OUTPUT_DIRECTORY=	#path to output directory
+WORKING_DIRECTORY=${OUTPUT_DIRECTORY}/${TAG}
+NB_CPU=16
+MTS=1			#max target sequences parameter
+
+mkdir -p ${WORKING_DIRECTORY}
+
+cd ${WORKING_DIRECTORY}
+
+# search Trinity transcripts
+blastx -query $ASSEMBLY -db $DB -num_threads $NB_CPU -max_target_seqs $MTS -outfmt 6 > blastx.outfmt6
+
+# search Transdecoder-predicted proteins
+blastp -query $TRANSDEC -db $DB -num_threads $NB_CPU -max_target_seqs $MTS -outfmt 6 > blastp.outfmt6
+

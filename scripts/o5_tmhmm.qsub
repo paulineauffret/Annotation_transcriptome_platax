@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS parameters
+
+ASSEMBLY=               #path to transcriptome assembly (fasta file)
+TRANSDEC=               #path to .transdecoder.pep file (resulting from step 01)
+TMHMM=			#path to .../tmhmm-2.0c/bin/tmhmm
+TAG="05_tmhmm"
+OUTPUT_DIRECTORY=       #path to output directory
+WORKING_DIRECTORY=${OUTPUT_DIRECTORY}/${TAG}
+OUT=${WORKING_DIRECTORY}/tmhmm.out
+
+mkdir -p ${WORKING_DIRECTORY}
+
+cd ${WORKING_DIRECTORY}
+
+$TMHMM --short < $TRANSDEC > $OUT

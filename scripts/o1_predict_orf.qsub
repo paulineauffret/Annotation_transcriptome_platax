@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS parameters...
+
+#Global variables
+WORKING_DIRECTORY=	#path to output directory
+TRINITY_UTIL_DIR=	#path to .../trinityrnaseq-2.4.0/util
+ASSEMBLY=		#path to transcriptome assembly
+TRANSDECODER_LONGORF=	#path to .../TransDecoder-5.1.0/TransDecoder.LongOrfs
+MINPROT=100
+
+mkdir -p $WORKING_DIRECTORY
+
+cd $WORKING_DIRECTORY
+
+time $TRANSDECODER_LONGORF -t $ASSEMBLY -m $MINPROT
+
+

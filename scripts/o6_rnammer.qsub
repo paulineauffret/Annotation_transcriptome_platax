@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS parameters...
+
+ASSEMBLY=               #path to transcriptome assembly (fasta file)
+RNAMMER=		#path to .../rnammer-1.2/rnammer
+TRINOTATE_HOME=		#path to Trinotate v3.1.1
+TAG="06_rnammer"
+OUTPUT_DIRECTORY=       #path to output directory
+WORKING_DIRECTORY=${OUTPUT_DIRECTORY}/${TAG}
+
+mkdir -p ${WORKING_DIRECTORY}
+
+cd ${WORKING_DIRECTORY}
+
+$TRINOTATE_HOME/util/rnammer_support/RnammerTranscriptome.pl --transcriptome $ASSEMBLY --path_to_rnammer $RNAMMER

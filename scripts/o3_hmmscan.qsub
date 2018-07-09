@@ -1,0 +1,20 @@
+#!/bin/bash
+#PBS parameters
+
+ASSEMBLY=		#path to transcriptome assembly (fasta file)
+TRANSDEC=		#path to .transdecoder.pep file (resulting from step 01)
+HMMSCAN=		#path to .../hmmer-3.1b1/bin/hmmscan
+PFAM=			#path to Pfam-A.hmm file (resulting from step 00)
+TAG="03_hmmscan"
+OUTPUT_DIRECTORY=	#path to output directory
+WORKING_DIRECTORY=${OUTPUT_DIRECTORY}/${TAG}
+LOG=${WORKING_DIRECTORY}/hmmscan.log
+NB_CPU=16
+
+mkdir -p ${WORKING_DIRECTORY}
+
+cd ${WORKING_DIRECTORY}
+
+$HMMSCAN --cpu $NB_CPU --domtblout ${WORKING_DIRECTORY}/TrinotatePFAM.out $PFAM $TRANSDEC > $LOG
+
+
